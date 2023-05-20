@@ -1,0 +1,25 @@
+{% extends 'ss_blog/edit.html' %}
+
+{% block content %}
+<div class="con_delete">
+  <h1>Delete Article</h1>
+  <p>Are you sure you want to delete "{{ post.topic }}"?</p>
+  <form method="POST" action="{% url 'ss_blog:delete_post' post.id %}">
+    {% csrf_token %}
+    <div class="btn1">
+      <button type="submit" class="closed_c">Delete</button>
+    </div>
+    <div class="display_image" style="  display: flex;
+    justify-content: center;
+    align-content: center;"><img src={{post.image.url}} alt=""></div>
+  </form>
+  <div class="close" style="
+  display: flex;
+  justify-content: center;
+  align-content: center; 
+  margin-top: 10px; 
+  "><a href="{% url 'ss_blog:contentpage_view' post.id %}" class="closed_c">close</a></div>
+  
+</div>
+
+{% endblock %}

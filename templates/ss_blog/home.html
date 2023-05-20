@@ -1,0 +1,13 @@
+{% extends 'ss_blog/base.html' %}
+{% block content %}
+<div class="content_container">
+    <div class="grid">
+        {% for x in topic_na %}
+        <div class="n1">
+            <img src="{{ x.image.url }}" alt="Lights">
+        <p class="navigation"><a href="{% url 'ss_blog:contentpage_view' x.id %}">{{x.topic}}</a></p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

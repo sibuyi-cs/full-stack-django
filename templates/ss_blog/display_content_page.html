@@ -1,0 +1,52 @@
+{% extends 'ss_blog/base.html' %}
+{% block content %}
+<div class="container-sub">
+    <div class="sub_content">
+        <div class="sub-heading">
+            <h3>{{post.tittle}}</h3>
+        </div>
+        <div class="text">
+            <div class="picture">
+                <div class="display_image"><img src={{post.image.url}} alt=""></div>
+                <h3 class="head_comments">comments</h3>
+                <div class="comments">
+                    <div class="comment_paragraph">
+                        {% if comments %}
+                        <div>
+                            {% for comment in comments %}
+                            <div class="comment_per">
+                                <h2 class="user_name">{{ comment.author }}</h2>
+                                <p class="comment"> {{ comment.text }}</p>
+                                <p class="dateC">{{comment.created_date}}</p>
+                            </div>
+                          
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p>No comments yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <h3 class="addC_">Add comment</h3>
+                <form method="post" class="comment_input" action="{% url 'ss_blog:post_comment' Topics_id=post.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit</button>
+                </form>                             
+            </div>
+            <div class="para_3">
+                <p class="">{{post.article}}</p>
+                <h5>{{post.created_at}}</h5>
+                <div class="edit">
+                    <a href="{% url 'ss_blog:edit' post.id %}">edit article</a>
+                </div> 
+                <div class="delete1">
+                    <a href="{% url 'ss_blog:delete_post' post.id %}" style="border: none;">delete article</a>
+                </div>  
+              
+            </div>
+
+        </div>  
+    </div>
+</div>
+{% endblock %}
